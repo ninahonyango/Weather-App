@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:weather_app1/profile.dart';
 import 'package:weather_app1/weather.dart';
+
+import 'home2.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,81 +14,116 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  int _selectedIndex = 0;
+  String word = 'Home';
+
+  void _navigationBottonBar(int index){
+    setState((){
+      _selectedIndex = index;
+      word = _words[index];
+    });
+  }
+
+  final List<Widget> _pages = [
+    homePage(),
+    Weather(),
+    Profile(),
+    
+  ];
+
+  final List<String> _words = [
+    'Home',
+    'Weather',
+    'Profile',
+    
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: Scaffold(
+
+        return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurple[300],
-          elevation: 0,
-          title: Text('Weather App'),
+          elevation: 4,
+          title: Center(child: Text(word)),
+          actions: [ 
+            IconButton( onPressed: () {}, icon: const Icon(Icons.share)),],
+          ),
 
-          actions: [
-            IconButton(
-              onPressed: () {
-                //do something
-              },
-              icon: Icon(Icons.person),
-            )
-
-          ],
-        ),
         drawer: Drawer(
-          child: Container(
-            color: Colors.deepPurple[100],
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Center(
-                      child: Text(
-                        'L O G O',
-                        style: TextStyle(fontSize: 35),
-                      )),
-                ),
-                ListTile(
-                  leading: Icon(Icons.home),
-                  title: Text(
-                    'Home',
+            child: Container(
+              color: Colors.deepPurple[200],
+              child: ListView(
+                
+                
+
+                children: [
+                  const DrawerHeader(
+                    child: ImageIcon(
+                      AssetImage("assets/weather2.png"),
+                      // color: Color(0xFF3A5A98), 
+                      ),
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.filter_drama),
-                  title: Text(
-                    'Weather',
+                  
+
+                  ListTile(
+                    leading: const Icon(Icons.home),
+                    title: const Text(
+                      'Home',
+                      style: TextStyle(fontSize: 20),
+                      ),
+                    onTap: () {                   
+                      _navigationBottonBar(0);
+                      },
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => WeatherPage()));
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(
-                    'Profile',
+
+                  ListTile(
+                    leading: const Icon(Icons.filter_drama),         
+                    title: const Text(
+                      'Weather',
+                      style: TextStyle(fontSize: 20),
+                      ),
+                      onTap: () {
+                        _navigationBottonBar(1);
+                      },
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ProfilePage())
-                    );
-                  },
-                ),
-              ],
+
+                  ListTile(
+                    leading: const Icon(Icons.person),
+                    title: const Text(
+                      'Profile',
+                      style: TextStyle(fontSize: 20),
+                      ),
+                      onTap: () {
+                        _navigationBottonBar(2);
+                      },
+                  ),
+                ],
+              ),
             ),
           ),
+      
+        bottomNavigationBar: GNav(
+          selectedIndex: _selectedIndex,
+          backgroundColor: const Color(0xFF9575CD),
+          color: Colors.white,
+          gap: 8,
+          activeColor: Colors.white,
+          tabBackgroundColor: const Color.fromARGB(255, 90, 90, 90),
+          padding: const EdgeInsets.all(16),   
+          
+          onTabChange: _navigationBottonBar,
+          tabs: const [
+            GButton(icon: Icons.home, text: 'Home',),
+            GButton(icon: Icons.filter_drama, text: 'Weather'),
+            GButton(icon: Icons.person, text: 'Profile'),
+          ]
         ),
-        body: Scaffold(
-          backgroundColor: Colors.blue,
-          body: Center(
-            child: Text('Welcome to Weather App'),
-          )),
-      ),
+
+        body: _pages[_selectedIndex],
+        
+
     );
   }
 }
-

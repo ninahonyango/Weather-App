@@ -1,93 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app1/weather.dart';
-
-import 'homepage.dart';
-
-class ProfilePage extends StatelessWidget {
 
 
-   Widget textfield({required String hintText}){
-     return Material(
-       elevation: 4,
-          shadowColor: Colors.grey,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
-          child: TextField(
-         decoration: InputDecoration(
-           hintText: hintText,
-           hintStyle: TextStyle(
-             letterSpacing: 2,
-             color: Colors.black54,
-             fontWeight: FontWeight.bold,
+  @override
+  State<Profile> createState() => _ProfileState();
+}
 
-           ),
-           fillColor: Colors.white30,
-           filled: true,
-           border: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(10.0),
-             borderSide: BorderSide.none
-           )
-         ),
-       ),
-     );
-   }
-   @override
-   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(
-         elevation: 0.0,
-         backgroundColor: Color(0xff555555),
-         leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: null),
-       ),
-         drawer: Drawer(
-           child: Container(
-             color: Colors.deepPurple[100],
-             child: ListView(
-               children: [
-                 DrawerHeader(
-                   child: Center(
-                       child: Text(
-                         'L O G O',
-                         style: TextStyle(fontSize: 35),
-                       )),
-                 ),
-                 ListTile(
-                   leading: Icon(Icons.home),
-                   title: Text(
-                     'Home',
-                   ),
-                   onTap: () {
-                     Navigator.of(context).push(
-                         MaterialPageRoute(builder: (context) => HomePage()));
-                   },
-                 ),
-                 ListTile(
-                   leading: Icon(Icons.filter_drama),
-                   title: Text(
-                     'Weather',
-                   ),
-                   onTap: () {
-                     Navigator.of(context).push(
-                         MaterialPageRoute(builder: (context) => WeatherPage()));
-                   },
-                 ),
-                 ListTile(
-                   leading: Icon(Icons.person),
-                   title: Text(
-                     'Profile',
-                   ),
-                   onTap: () {
-                     Navigator.of(context).push(
-                         MaterialPageRoute(builder: (context) => ProfilePage())
-                     );
-                   },
-                 ),
-               ],
-             ),
-           ),
-         ),
+class _ProfileState extends State<Profile> {
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      // appBar: AppBar(
+      //     backgroundColor: Colors.deepPurple[300],
+      //     elevation: 4,
+      //     title: const Center(child: Text('Weather App')),
+      //     actions: [ 
+      //       IconButton( onPressed: () {}, icon: const Icon(Icons.share)),],
+      //     ),
 
          body: Stack(
          alignment: Alignment.center,
@@ -104,12 +38,8 @@ class ProfilePage extends StatelessWidget {
 
                    children: [
                      SizedBox(height: 50.0,),
-                     textfield(
-                       hintText: 'Username',
-                     ),
-                     textfield(
-                       hintText: 'Birthday',
-                     ),
+                     Text('Username'),
+                     Text('Birthday'),
                      SizedBox(height: 30.0,),
 
                      Container(
@@ -136,7 +66,7 @@ class ProfilePage extends StatelessWidget {
                width: MediaQuery.of(context).size.width,
                height: MediaQuery.of(context).size.height,
              ),
-             painter: HeaderCurvedContainer(),
+            //  painter: HeaderCurvedContainer(),
            ),
            Column(
              crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                    style: TextStyle(
                      fontSize: 35,
                      letterSpacing: 1.5,
-                     color: Colors.white,
+                     color: Colors.black,
                      fontWeight: FontWeight.w600,
                    ),
                  ),
@@ -162,41 +92,17 @@ class ProfilePage extends StatelessWidget {
                    color: Colors.white,
                    image: DecorationImage(
                      fit: BoxFit.cover,
-                     image: AssetImage('images/profile.png'),
+                     image: AssetImage('assets/Tom.webp'),
                    ),
                  ),
                ),
              ],
            ),
-           Padding(padding: EdgeInsets.only(bottom: 270,left: 184),
-           child: CircleAvatar(
-               backgroundColor: Colors.black54,
-               child: IconButton(
-                   icon: Icon(
-                     Icons.edit,
-                     color: Colors.white,
-                   ),
-                   onPressed: () {},
-               ),
-             ),
-           )
+           
          ],
        )
-     );
-   }
- }
- class HeaderCurvedContainer extends CustomPainter{
-
-   @override
-   void paint (Canvas canvas,Size size){
-     Paint paint = Paint()..color = Color(0xff555555);
-     Path path = Path()
-       ..relativeLineTo(0, 150)
-       ..quadraticBezierTo(size.width / 2, 225, size.width, 150)
-       ..relativeLineTo(0, -150)
-       ..close();
-       canvas.drawPath(path, paint);
-   }
-   @override
-   bool shouldRepaint(CustomPainter oldDelegate)=>false;
- }
+     
+    );
+    
+  }
+}
