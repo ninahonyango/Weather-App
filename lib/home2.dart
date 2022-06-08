@@ -13,15 +13,7 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/background.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(child: Text('Home'),)
-        ),
+      body: Center(child: Text('Home'),),
     );
   }
 }
