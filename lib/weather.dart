@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
-import 'data_service.dart';
+import 'package:weather_app1/data_service.dart';
 
-class Weather extends StatefulWidget {
-  const Weather({Key? key}) : super(key: key);
+class WeatherPage extends StatefulWidget {
+  const WeatherPage({Key? key}) : super(key: key);
 
   @override
-  State<Weather> createState() => _WeatherState();
+  State<WeatherPage> createState() => _WeatherPageState();
 }
 
-class _WeatherState extends State<Weather> {
-
+class _WeatherPageState extends State<WeatherPage> {
   String place = '';
+  String descr = '';
+  String tempe = '';
   final _cityTextController = TextEditingController();
   final _dataService = DataService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset : false,
       body:Column(
         children: <Widget>[
 
           //city name
           const SizedBox(height: 30),
-          Padding(
+          Container(
             padding: EdgeInsets.fromLTRB(0, 0, 100, 0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: TextField(
                 controller: _cityTextController,
                 decoration: InputDecoration(
-                  // border: InputBorder.none,
-                  hintText: 'enter city name',
+                  labelText: 'enter city name',
                   suffixIcon: Icon(Icons.search),
                 ),
               ),
             ),
           ),
-          ElevatedButton(onPressed: () {_search();}, child: Text('Search')),
+
+          ElevatedButton(onPressed: () {
+            _search();
+            place = _cityTextController.text;
+          }, child: Text('Search')),
 
           //Place
           const SizedBox(height: 30),
@@ -78,7 +82,7 @@ class _WeatherState extends State<Weather> {
               ),
 
               Text(
-                'Clouds',
+                descr,
                 style: TextStyle(
                   color: Colors.blue,
                   letterSpacing: 2.0,
@@ -103,7 +107,7 @@ class _WeatherState extends State<Weather> {
               ),
 
               Text(
-                '20.53',
+                tempe,
                 style: TextStyle(
                   color: Colors.blue,
                   letterSpacing: 2.0,
@@ -153,7 +157,7 @@ class _WeatherState extends State<Weather> {
               ),
 
               Text(
-                '1022',
+                press,
                 style: TextStyle(
                   color: Colors.blue,
                   letterSpacing: 2.0,
@@ -178,7 +182,7 @@ class _WeatherState extends State<Weather> {
               ),
 
               Text(
-                '71',
+                hum,
                 style: TextStyle(
                   color: Colors.blue,
                   letterSpacing: 2.0,
@@ -193,14 +197,29 @@ class _WeatherState extends State<Weather> {
       ),
 
     );
+
   }
-  void _search () async{
+
+  String hum = '';
+  String press = '';
+  double tem = 0;
+  int hu = 0;
+  int pre = 0;
+
+  Future<void> _search() async {
     final response = await _dataService.getWeather(_cityTextController.text);
-    print(response.cityName);
-    setState((){
-      place = _cityTextController.text;
-    });
+    setState((){});
+
+
+    place = response.name!;
+    tem = response.main!.temp!;
+    hu = response.main!.humidity!;
+    pre = response.main!.pressure!;
+    descr = response.weather![0].description!;
+    hum = hu.toString();
+    press = pre.toString();
+    tempe = tem.toString() + 'F';
+
   }
+
 }
-
-
