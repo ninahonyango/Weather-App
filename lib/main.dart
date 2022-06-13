@@ -1,8 +1,13 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:weather_app1/weather.dart';
 import 'package:weather_app1/profile.dart';
 import 'homepage.dart';
-import 'weather.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+
+import 'models.dart';
+
 
 void main(){
   runApp(const MyApp());
@@ -30,7 +35,7 @@ class _MyAppState extends State<MyApp> {
     HomePage(),
     WeatherPage(),
     Profile(),
-
+    
   ];
 
   @override
@@ -41,20 +46,20 @@ class _MyAppState extends State<MyApp> {
 
       home: AnimatedSplashScreen(
         splash: Image.asset('assets/weather2.png'),
-        nextScreen: HomePage(),
-        splashTransition: SplashTransition.decoratedBoxTransition,
-        backgroundColor: Colors.redAccent,
-
+       nextScreen: HomePage(),
+       splashTransition: SplashTransition.decoratedBoxTransition,
+       backgroundColor: Colors.redAccent,
+       
       ),
     );
-
+    
     // return MaterialApp(
     //   debugShowCheckedModeBanner: false,
     //   // theme: ThemeData(primarySwatch: Colors.green),
     //   // home: HomePage(),
     //   home: Scaffold(
-
-
+         
+          
 
     //     bottomNavigationBar: GNav(
     //       selectedIndex: _selectedIndex,
@@ -64,7 +69,7 @@ class _MyAppState extends State<MyApp> {
     //       activeColor: Colors.white,
     //       tabBackgroundColor: Color.fromARGB(255, 90, 90, 90),
     //       padding: EdgeInsets.all(16),   
-
+          
     //       onTabChange: _navigationBottonBar,
     //       tabs: [
     //         GButton(icon: Icons.home, text: 'Home',),
@@ -73,7 +78,7 @@ class _MyAppState extends State<MyApp> {
     //       ]
     //     ),
     //     body: _pages[_selectedIndex],
-
+      
 
     //     // body: HomePage(),
     //   ),

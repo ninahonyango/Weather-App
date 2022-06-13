@@ -4,16 +4,16 @@
       {
         "description": "light intensity drizzle"
       }
-     ],
+     ],  
      "main": {
        "temp": 280.32,
        "pressure": 1012,
        "humidity": 81,
        "temp_min": 279.15,
        "temp_max": 281.15
-     },
+     }, 
      "name": "London"
-     }
+     }                   
 */
 
 class WeatherResponse {
@@ -108,7 +108,7 @@ class Main {
 //   final double temperature;
 
 //   TemperatureInfo({required this.temperature});
-
+  
 //   factory TemperatureInfo.fromJson(Map<String, dynamic> json){
 //     final temperature = json['temp'];
 //     return TemperatureInfo(temperature: temperature);
@@ -120,7 +120,7 @@ class Main {
 //   final double pressure;
 
 //   PressureInfo({required this.pressure});
-
+  
 //   factory PressureInfo.fromJson(Map<String, dynamic> json){
 //     final pressure = json['pressure'];
 //     return PressureInfo(pressure: pressure);
@@ -132,7 +132,7 @@ class Main {
 //   final double humidity;
 
 //   HumidityInfo({required this.humidity});
-
+  
 //   factory HumidityInfo.fromJson(Map<String, dynamic> json){
 //     final humidity = json['humidity'];
 //     return HumidityInfo(humidity: humidity);
@@ -148,9 +148,9 @@ class Main {
 //   // final HumidityInfo humidityInfo;
 
 //   WeatherResponse({
-//     required this.cityName,
-//     required this.tempInfo,
-//     required this.weatherInfo,
+//     required this.cityName, 
+//     required this.tempInfo, 
+//     required this.weatherInfo, 
 //     // required this.pressureInfo,
 //     // required this.humidityInfo,
 //     });
@@ -169,11 +169,11 @@ class Main {
 
 //     final weatherInfoJson = json['weather'][0];
 //     final weatherInfo = WeatherInfo.fromJson(weatherInfoJson);
-
+    
 //     return WeatherResponse(
-//       cityName: cityName,
-//       tempInfo: tempInfo,
-//       weatherInfo: weatherInfo,
+//       cityName: cityName, 
+//       tempInfo: tempInfo, 
+//       weatherInfo: weatherInfo, 
 //       // pressureInfo: pressureInfo,
 //       // humidityInfo: humidityInfo
 //       );

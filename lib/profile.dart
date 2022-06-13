@@ -30,12 +30,12 @@ class _ProfileState extends State<Profile> {
             fit: BoxFit.cover,
           ),
         ),
-
+        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: 40.0,),
-
+            
             const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/Tom.webp'),
@@ -43,25 +43,25 @@ class _ProfileState extends State<Profile> {
               ),
             ),
 
-            //divider
+ //divider             
             Divider(
               height: 20.0,
               color: Colors.grey[800],
             ),
 
-//name
-            SizedBox(height: 30.0,),
+//name    
+            SizedBox(height: 30.0,),          
             Row(
               children: [
                 Text(
                   'NAME: ',
                   style: TextStyle(
                     color: Colors.black,
-
+                    
                     fontSize: 25.0,
                   ),
                 ),
-
+                
                 Text(
                   'Tom Cruise',
                   style: TextStyle(
@@ -82,11 +82,11 @@ class _ProfileState extends State<Profile> {
                   'BIRTHDAY: ',
                   style: TextStyle(
                     color: Colors.black,
-
+                    
                     fontSize: 25.0,
                   ),
                 ),
-
+                
                 Text(
                   '3rd July 1962',
                   style: TextStyle(
@@ -106,7 +106,7 @@ class _ProfileState extends State<Profile> {
               color: Colors.grey[800],
             ),
 
-//Version
+//Version          
             Text(
               '@ version 1.0.2',
               style: TextStyle(
@@ -120,6 +120,6 @@ class _ProfileState extends State<Profile> {
       ),
 
     );
-
+    
   }
 }
