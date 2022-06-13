@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:weather_app1/profile.dart';
 import 'package:weather_app1/weather.dart';
-// import 'package:weather_app/profile.dart';
-// import 'package:weather_app/weather.dart';
-
 import 'home2.dart';
 import 'models.dart';
 
@@ -128,7 +125,7 @@ class _HomePageState extends State<HomePage> {
 
       body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
+            image: DecorationImage(x
               image: AssetImage("assets/background.jpg"),
               fit: BoxFit.cover,
             ),
