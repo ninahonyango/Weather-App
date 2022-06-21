@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_app/data_service.dart';
+import 'package:weather_app1/data_service.dart';
 
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
@@ -12,183 +12,258 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
 
-  Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
+  var lat = '';
+  var long = '';
 
-  // Test if location services are enabled.
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    // Location services are not enabled don't continue
-    // accessing the position and request users of the 
-    // App to enable the location services.
-    return Future.error('Location services are disabled.');
+  void getCurrentLocation()async{
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    var lati = position.latitude;
+    var longi = position.longitude;
+    setState(() {
+      lat = lati.toString();
+      long = longi.toString();
+    });
   }
 
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      // Permissions are denied, next time you could try
-      // requesting permissions again (this is also where
-      // Android's shouldShowRequestPermissionRationale 
-      // returned true. According to Android guidelines
-      // your App should show an explanatory UI now.
-      return Future.error('Location permissions are denied');
-    }
-  }
-  
-  if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately. 
-    return Future.error(
-      'Location permissions are permanently denied, we cannot request permissions.');
-  } 
-
-  // When we reach here, permissions are granted and we can
-  // continue accessing the position of the device.
-  return await Geolocator.getCurrentPosition();
-}
 
   @override
   Widget build(BuildContext context) {
 
+
+
     // _determinePosition();
+    getCurrentLocation();
+     _search();
+    
 
     final height = MediaQuery.of(context).size.height;
     final widht = MediaQuery.of(context).size.height;
-    var inputBorder = OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30.0),
-                        ),
-                      );
-    return Stack(
-      children: [
-        // Positioned(
-        //   bottom: height / 2.4,
-        //   child: Image.asset(
-        //     'assets/new-york.jpg',
-        //     height: height,
-        //     fit: BoxFit.fill,
-        //     ),
-        //   ),
-        // Positioned(
-        //   bottom: 0,
-        //   child: Container(
-        //     height: height / 2.4,
-        //     width: widht,
-        //     color: Colors.white,
-        //   )
-        //   ),
-        Scaffold(
-          backgroundColor: Colors.black45,
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18),
-            child: DefaultTextStyle(
-              style: TextStyle(color: Colors.white),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 100,),
-                  Text(
-                    'Hello',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Text(
-                    'Check the weather by the city',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+    return SafeArea(
+      child: Stack(
+        children: [
+          Container(
+            color: Color.fromARGB(255, 204, 255, 204),
 
-                  SizedBox(height: 35),
-                  TextField(
-                    decoration: InputDecoration(
-                      border: inputBorder,
-                      enabledBorder: inputBorder,
-                      focusedBorder: inputBorder,
-                      hintText: 'Search city',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600
-                      ),
-                      suffixIcon: Icon(Icons.search, color: Colors.white,)
+            height: height,
+            width: widht,
+            padding: const EdgeInsets.all(20.0),
 
-                    ),
-                  ),
-
-                          Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ListView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: Column(
                     children: [
-                      ListTile(
-                        leading:FaIcon(FontAwesomeIcons.locationDot),
-                        title: Text(
-                          'Place',
-                          // style: TextStyle(color: Colors.black),
-                          ),
-                        trailing: Text(place),
-                      ),
+                      Text(
+                        place,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w900,
+                        ),
+                        ),
 
-                      ListTile(
-                        leading: FaIcon(FontAwesomeIcons.cloud),
-                        title: Text(
-                          'Description',
-                          // style: TextStyle(color: Colors.black),
-                          ),
-                        trailing: Text(descr),
-                      ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          child: Text(
+                            tempe,
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 0, 51, 153),
 
-                      ListTile(
-                        leading: FaIcon(FontAwesomeIcons.temperatureHalf),
-                        title: Text(
-                          'Temperature',
-                          // style: TextStyle(color: Colors.black),
-                          ),
-                        trailing: Text(tempe+'\u00B0'+'C'),
-                      ),
+                              fontSize: 60.0,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: 'Pacifico-Regular'
+                            ),
+                            ),
 
-                      ListTile(
-                        leading: FaIcon(FontAwesomeIcons.temperatureHalf),
-                        title: Text(
-                          'Perceived',
-                          // style: TextStyle(color: Colors.black),
                           ),
-                        trailing: Text('52'+'\u00B0'+'C'),
-                      ),
+                          
+                          // Text(
+                          //   'Latitude: $lat, Longitude: $long',
+                          //   style: TextStyle(
+                          //     color: Color.fromARGB(123, 155, 39, 176),
+                          //     fontSize: 14.0,
+                          //     fontWeight: FontWeight.w900,
+                          //     fontFamily: 'Pacifico-Regular'
+                          //   ),
+                          //   )
 
-                      ListTile(
-                        leading: FaIcon(FontAwesomeIcons.tachometer),
-                        title: Text(
-                          'Pressure',
-                          // style: TextStyle(color: Colors.black),
-                          ),
-                        trailing: Text(press),
-                      ),
 
-                      ListTile(
-                        leading: FaIcon(FontAwesomeIcons.tint),
-                        title: Text(
-                          'Humidity',
-                          // style: TextStyle(color: Colors.black),
-                          ),
-                        trailing: Text(hum),
-                      ),
                     ],
+                  )
+                ),
+                    
+                
+              ]
+              ),
+
+          ),
+          
+    
+        Positioned(
+        bottom: 0,
+        child: Container(
+          height: MediaQuery.of(context).size.height / 2,
+          width: MediaQuery.of(context).size.width,
+          // color: Color.fromARGB(255, 204, 255, 204),
+
+        decoration: new BoxDecoration(
+            color: Color.fromARGB(255, 129, 165, 148),
+          borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(40.0),
+            topRight: const Radius.circular(40.0),
+          )
+        ),
+        
+          
+          child: Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ListView(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading:FaIcon(
+                      color: Colors.white,
+                      FontAwesomeIcons.locationDot),
+                    title: Text(
+                        style: TextStyle(color: Colors.white),
+                      'Place',
+                      // style: TextStyle(color: Colors.black),
+                      ),
+                    subtitle: Text(
+                        style: TextStyle(color: Colors.white),place),
                   ),
                 ),
-              ),
-        
-                ]
+      
+                SizedBox(height: 10,),
+                Container(                      
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading: FaIcon(                          
+                      color: Colors.white,
+                      FontAwesomeIcons.cloud),
+                    title: Text(
+                      style: TextStyle(color: Colors.white),
+                      'Description',                          
+                      ),
+                    subtitle: Text(
+                      style: TextStyle(color: Colors.white),                          
+                      descr),
+                  ),
                 ),
+      
+                SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading: FaIcon(
+                        color: Colors.white,FontAwesomeIcons.temperatureHalf),
+                    title: Text(
+                        style: TextStyle(color: Colors.white),
+                      'Temperature',
+                      // style: TextStyle(color: Colors.black),
+                      ),
+                    subtitle: Text(
+                        style: TextStyle(color: Colors.white),tempe),
+                  ),
+                ),
+      
+                SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading: FaIcon(
+                        color: Colors.white,FontAwesomeIcons.temperatureHalf),
+                    title: Text(
+                        style: TextStyle(color: Colors.white),
+                      'Perceived',
+                      // style: TextStyle(color: Colors.black),
+                      ),
+                    subtitle: Text(
+                        style: TextStyle(color: Colors.white),'52'+'\u00B0'+'C'),
+                  ),
+                ),
+      
+                SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading: FaIcon(
+                        color: Colors.white,FontAwesomeIcons.tachometer),
+                    title: Text(
+                        style: TextStyle(color: Colors.white),
+                      'Pressure',
+                      // style: TextStyle(color: Colors.black),
+                      ),
+                    subtitle: Text(
+                        style: TextStyle(color: Colors.white),press),
+                  ),
+                ),
+      
+                SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 7, 156, 232),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(60))
+                  ),
+                  child: ListTile(
+                    leading: FaIcon(
+                        color: Colors.white,FontAwesomeIcons.tint),
+                    title: Text(
+                        style: TextStyle(color: Colors.white),
+                      'Humidity',
+                      // style: TextStyle(color: Colors.black),
+                      ),
+                    subtitle: Text(
+                        style: TextStyle(color: Colors.white),hum),
+                  ),
+                ),
+              ],
             ),
           ),
+                    ),
         ),
-      ],
-      );
+      ),
+
+        ],
+        ),
+    );
       
   }
 
@@ -205,7 +280,7 @@ class _homePageState extends State<homePage> {
   final _dataService = DataService();
 
   Future<void> _search() async {
-    final response = await _dataService.getWeather('');
+    final response = await _dataService.getWeather('',lat,long);
     setState((){});
     
 
@@ -217,7 +292,7 @@ class _homePageState extends State<homePage> {
     descr = response.weather![0].description!;
     hum = hu.toString();
     press = pre.toString() + ' hPa';
-    tempe = tem.toString();
+    tempe = tem.toString() +'\u00B0'+'C';
     
   }
 }

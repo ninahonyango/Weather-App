@@ -1,12 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:weather_app1/weather.dart';
 import 'package:weather_app1/profile.dart';
+import 'package:weather_app1/weather.dart';
 import 'homepage.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-
-import 'models.dart';
 
 
 void main(){
@@ -33,7 +30,7 @@ class _MyAppState extends State<MyApp> {
 
   final List<Widget> _pages = [
     HomePage(),
-    WeatherPage(),
+    Weather(),
     Profile(),
     
   ];

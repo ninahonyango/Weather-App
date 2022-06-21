@@ -4,14 +4,30 @@ import 'models.dart';
 
 // const String appid = "78a9a8ccd663901bcb952cca2401c9ce";
 class DataService {
-  Future<WeatherResponse> getWeather(String city) async {
+  Future<WeatherResponse> getWeather(String city, String lat, String long) async {
      // https://api.openweathermap.org/data/2.5/weather?q=kisumu&appid=78a9a8ccd663901bcb952cca2401c9ce
 
-     final queryParameters = {
+     final queryParameters;
+     
+     if (city == ''){
+      queryParameters = {
+       'lat': lat,
+       'lon': long,
+       'appid': '78a9a8ccd663901bcb952cca2401c9ce',
+       'units': 'imperial'
+       };
+
+     }
+     else{
+      queryParameters = {
        'q': city, 
        'appid': '78a9a8ccd663901bcb952cca2401c9ce',
        'units': 'imperial'
        };
+
+     }
+
+     
 
      final uri = Uri.https('api.openweathermap.org', '/data/2.5/weather', queryParameters);
 
