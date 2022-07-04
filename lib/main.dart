@@ -45,7 +45,8 @@ class _MyAppState extends State<MyApp> {
         splash: Image.asset('assets/weather2.png'),
        nextScreen: HomePage(),
        splashTransition: SplashTransition.decoratedBoxTransition,
-       backgroundColor: Colors.redAccent,
+       backgroundColor: Color.fromARGB(255, 148, 239, 231),
+
        
       ),
     );

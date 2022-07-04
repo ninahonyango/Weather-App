@@ -135,7 +135,7 @@ class _homePageState extends State<homePage> {
                       color: Colors.white,
                       FontAwesomeIcons.locationDot),
                     title: Text(
-                        style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.orangeAccent),
                       'Place',
                       // style: TextStyle(color: Colors.black),
                       ),
@@ -158,7 +158,7 @@ class _homePageState extends State<homePage> {
                       color: Colors.white,
                       FontAwesomeIcons.cloud),
                     title: Text(
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.orangeAccent),
                       'Description',                          
                       ),
                     subtitle: Text(
@@ -180,7 +180,7 @@ class _homePageState extends State<homePage> {
                     leading: FaIcon(
                         color: Colors.white,FontAwesomeIcons.temperatureHalf),
                     title: Text(
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.orangeAccent),
                       'Temperature',
                       // style: TextStyle(color: Colors.black),
                       ),
@@ -202,7 +202,7 @@ class _homePageState extends State<homePage> {
                     leading: FaIcon(
                         color: Colors.white,FontAwesomeIcons.temperatureHalf),
                     title: Text(
-                        style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.orangeAccent),
                       'Perceived',
                       // style: TextStyle(color: Colors.black),
                       ),
@@ -224,7 +224,7 @@ class _homePageState extends State<homePage> {
                     leading: FaIcon(
                         color: Colors.white,FontAwesomeIcons.tachometer),
                     title: Text(
-                        style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.orangeAccent),
                       'Pressure',
                       // style: TextStyle(color: Colors.black),
                       ),
@@ -246,7 +246,7 @@ class _homePageState extends State<homePage> {
                     leading: FaIcon(
                         color: Colors.white,FontAwesomeIcons.tint),
                     title: Text(
-                        style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.orangeAccent),
                       'Humidity',
                       // style: TextStyle(color: Colors.black),
                       ),
