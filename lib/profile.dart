@@ -58,7 +58,7 @@ class _ProfileState extends State<Profile> {
                   ),
 
                   Text(
-                    'Tom Cruise',
+                    'Aida Bugg',
                     style: TextStyle(
                       color: Colors.blue,
                       letterSpacing: 2.0,
@@ -83,7 +83,7 @@ class _ProfileState extends State<Profile> {
                   ),
 
                   Text(
-                    '3rd July 1962',
+                    '16th Sept 1998',
                     style: TextStyle(
                       color: Colors.blue,
                       letterSpacing: 2.0,
