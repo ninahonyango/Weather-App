@@ -157,7 +157,7 @@ class _WeatherState extends State<Weather> {
                           // style: TextStyle(color: Colors.black),
                           ),
                         trailing: Text(
-                            style: TextStyle(color: Colors.white),'52'+'\u00B0'+'C'),
+                            style: TextStyle(color: Colors.white),percive),
                       ),
                     ),
           
@@ -220,28 +220,34 @@ class _WeatherState extends State<Weather> {
   String place = '';
   String descr = '';
   String tempe = '';
+  String percive = '';
   String hum = '';
   String press = '';
+  String icon = '';
   double tem = 0;
   double tem1 = 0;
+  double feels = 0;
   int hu = 0;
   int pre = 0;
 
   Future<void> _search() async {
     final response = await _dataService.getWeather(_cityTextController.text,'','');
     setState((){});
-    
+
 
     place = response.name!;
     tem1 = response.main!.temp!;
+    feels = response.main!.feelsLike!;
+    feels = double.parse(((feels - 32) * 5/9).toStringAsFixed(2));
     tem = double.parse(((tem1 - 32) * 5/9).toStringAsFixed(2));
     hu = response.main!.humidity!;
     pre = response.main!.pressure!;
     descr = response.weather![0].description!;
-    hum = hu.toString();
+    icon = response.weather![0].icon!;
+    hum = hu.toString() + '%';
     press = pre.toString() + ' hPa';
     tempe = tem.toString() +'\u00B0'+'C';
-    
+    percive = feels.toString() +'\u00B0'+'C';
   }
 
 }

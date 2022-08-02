@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
           IconButton( 
             onPressed: () {}, 
             icon: const CircleAvatar(
-              backgroundImage: AssetImage('assets/nina1.jpeg'),
+              backgroundImage: AssetImage('assets/Tom.webp'),
               backgroundColor: Colors.black26,
             )
           )

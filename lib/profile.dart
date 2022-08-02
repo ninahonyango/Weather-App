@@ -16,7 +16,9 @@ class _ProfileState extends State<Profile> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xEE2D2F49),
+
+        backgroundColor: Color.fromARGB(255, 204, 255, 204),
+
         // appBar: AppBar(
         //     backgroundColor: Colors.deepPurple[300],
         //     elevation: 4,
@@ -29,7 +31,7 @@ class _ProfileState extends State<Profile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 40.0,),
+              SizedBox(height: 70.0,),
 
               const Center(
                 child: CircleAvatar(
@@ -45,7 +47,7 @@ class _ProfileState extends State<Profile> {
               ),
 
               //name
-              SizedBox(height: 30.0,),
+              SizedBox(height: 40.0,),
               Row(
                 children: [
                   Text(
@@ -63,7 +65,7 @@ class _ProfileState extends State<Profile> {
                       color: Colors.blue,
                       letterSpacing: 2.0,
                       fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -83,7 +85,7 @@ class _ProfileState extends State<Profile> {
                   ),
 
                   Text(
-                    '16th Sept 1998',
+                    '16th Sept 2000',
                     style: TextStyle(
                       color: Colors.blue,
                       letterSpacing: 2.0,
@@ -93,7 +95,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              SizedBox(height: 370.0),
+              SizedBox(height: 200.0),
 
 
               Divider(
@@ -102,12 +104,16 @@ class _ProfileState extends State<Profile> {
               ),
 
               //Version
-              Text(
-                '@ version 1.0.2',
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 18.0,
-                  letterSpacing: 1.0,
+              Container(
+                child: Center(
+                  child: Text(
+                    '@ version 1.0.2',
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 18.0,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
                 ),
               )
             ],
